@@ -4,7 +4,7 @@ console.log("DayTime");
 console.log(isDay);
 console.log("lights on?");
 console.log(isLightOn);
-const batteryLevel = 50;
+const batteryLevel = 5;
 console.log("Nível da bateria?");
 console.log(batteryLevel + "%");
 const isWorking = isLightOn === true && batteryLevel > 0;
