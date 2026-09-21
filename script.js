@@ -1,4 +1,5 @@
-let isDay = false;
+// CORRIGIDO: troquei const por let pra poder trocar de dia/noite
+let isDay = false; 
 let isLightOn = !isDay;
 const batteryLevel = 5;
 
@@ -6,25 +7,28 @@ console.log("DayTime");
 console.log(isDay);
 console.log("Lights on?");
 console.log(isLightOn);
-console.log("Nivel da bateria?");
-console.log(batteryLevel + "%");
-let isWorking = isLightOn === true && batteryLevel > 0;
-console.log("tudo funcionando?");
-console.log(isWorking);
 function atualizarTela() {
   isLightOn = !isDay;
-  isWorking = isLightOn === true && batteryLevel > 0;
+  let isWorking = isLightOn === true && batteryLevel > 0;
   document.getElementById("status-dia").textContent = isDay ? "Período: Dia" : "Período: Noite";
   document.getElementById("status-luz").textContent = isLightOn ? "Luz: Ligada" : "Luz: Desligada";
   document.getElementById("status-final").textContent = isWorking ? "Sistema operacional" : "Sistema inoperante";
   document.getElementById("nivel").style.width = batteryLevel + "%";
   const lamp = document.getElementById("lampada");
+  const body = document.body;
   if(isLightOn){
     lamp.classList.add("acesa");
-    document.body.style.background = isDay ? "#3a3a2a" : "#1a1a2e"; // noite com luz acesa fica amarelinho
+    body.style.background = "#f5e6a0";
+    body.style.color = "#222";
   } else {
     lamp.classList.remove("acesa");
-    document.body.style.background = isDay ? "#87CEEB" : "#0f0f1a"; // dia claro / noite escura
+    if(isDay){
+      body.style.background = "#87CEEB";
+      body.style.color = "#222";
+    } else {
+      body.style.background = "#0f0f1a";
+      body.style.color = "white";
+    }
   }
 }
 function trocarDiaNoite(){
