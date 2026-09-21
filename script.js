@@ -1,30 +1,38 @@
-let isDay = false; 
-let isLightOn = !isDay;
-const batteryLevel = 5;
-function atualizarTela() {
-  isLightOn = !isDay;
-  let isWorking = isLightOn && batteryLevel > 0;
-  document.getElementById("status-dia").textContent = isDay ? "Período: Dia" : "Período: Noite";
-  document.getElementById("status-luz").textContent = isLightOn ? "Luz: Ligada" : "Luz: Desligada";
+const isDay = false;
+const isLightOn = isDay;
+console.log("DayTime");
+console.log(isDay);
+console.log("Light on");
+console.log(isLightOn);
+let batteryLevel = 100;
+console.log("Nivel da bateria");
+console.log(batteryLevel + "%");
+let isWorking = isLightOn === true && batteryLevel > 0;
+console.log("tudo funcionando");
+console.log(isWorking);
+document.getElementById("status-dia").textContent = isDay ? "Periodo: Dia" : "Periodo: Noite";
+document.getElementById("status-luz").textContent = isLightOn ? "Luz: Ligada" : "Luz: Desligada";
+document.getElementById("status-final").textContent = isWorking ? "Sistema operacional" : "Sistema inoperante";
+document.getElementById("status-bateria").textContent = batteryLevel + "%";
+let luzLigada = isLightOn;
+let timer = null;
+function clicarInterruptor() {
+  luzLigada = !luzLigada;
+  document.getElementById("status-luz").textContent = luzLigada ? "Luz: Ligada" : "Luz: Desligada";
+  isWorking = luzLigada === true && batteryLevel > 0;
   document.getElementById("status-final").textContent = isWorking ? "Sistema operacional" : "Sistema inoperante";
-  const lamp = document.getElementById("lampada");
-  if (isLightOn) {
-    lamp.className = "acesa";
-    document.body.style.background = "#fff3b0";
-    document.body.style.color = "#222";
+  if (luzLigada) {
+    timer = setInterval(() => {
+      if (batteryLevel > 0) {
+        batteryLevel--;
+        document.getElementById("status-bateria").textContent = batteryLevel + "%";
+      } else {
+        clearInterval(timer);
+        document.getElementById("status-final").textContent = "Bateria acabou!";
+      }
+    }, 1000);
   } else {
-    lamp.className = "apagada";
-    if (isDay) {
-      document.body.style.background = "#87CEEB";
-      document.body.style.color = "#222";
-    } else {
-      document.body.style.background = "#0f0f1a";
-      document.body.style.color = "white";
-    }
+    clearInterval(timer);
   }
 }
-function trocarDiaNoite() {
-  isDay = !isDay;
-  atualizarTela();
-}
-atualizarTela();
+document.getElementById("btn-luz").onclick = clicarInterruptor;
