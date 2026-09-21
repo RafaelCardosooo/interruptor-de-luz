@@ -1,8 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Interruptor</title>
+<style>
+ body{margin:0;height:100vh;display:flex;justify-content:center;align-items:center;background:#1a1a2e;transition:0.5s;font-family:Arial}
+ body.on{background:#eeff41}
+ .card{background:white;padding:25px;border-radius:20px;text-align:center;width:280px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+ #lamp{font-size:80px;transition:0.3s;display:inline-block}
+ #lamp.on{filter:drop-shadow(0 0 25px gold);transform:scale(1.2)}
+ .barra{width:100%;height:18px;background:#ddd;border-radius:10px;overflow:hidden}
+ #nivel{height:100%;width:100%;background:#00c853;transition:0.5s}
+ button{margin-top:15px;padding:10px 20px;border:none;border-radius:8px;background:black;color:white;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
 <div class="card">
-  <h1>Interruptor de Luz</h1>
+  <div id="lamp">💡</div>
+  <h3>Interruptor de Luz</h3>
   <p id="status-dia"></p>
   <p id="status-luz"></p>
-  <p>Bateria: <span id="status-bateria"></span></p>
-  <div id="status-final"></div>
-<button id="btn-luz">LIGAR / DESLIGAR</button>
+  <p>Bateria: <span id="status-bateria">100%</span></p>
+  <div class="barra"><div id="nivel"></div></div>
+  <p id="status-final"></p>
+  <button id="btn-luz">LIGAR / DESLIGAR</button>
 </div>
+<script src="script.js"></script>
+</body>
+</html>
